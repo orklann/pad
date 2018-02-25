@@ -2,7 +2,7 @@ var {ipcRenderer, remote} = require('electron');
 
 function main() {
   console.log("main() loaded...");
-  document.body.addEventListener('keydown', onKeydown, false);
+  window.addEventListener('keydown', onKeydown, false);
   var addressDiv = document.querySelector('#url-div');
   addressDiv.style.display = "none";
 }
@@ -25,7 +25,12 @@ function onKeydown(e) {
   } else if(e.keyCode == 27) {
     var addressDiv = document.querySelector('#url-div');
     addressDiv.style.display = "none";
+  } else if(e.keyCode == 37) {
+    document.querySelector("#web-content").goBack();
+  } else if(e.keyCode == 39) {
+    document.querySelector("#web-content").goForward();
   }
+  console.log("Window keydown detected.");
 }
 
 main();

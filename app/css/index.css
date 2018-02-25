@@ -26,6 +26,17 @@ body {
 
 #url-address {
 	width: 300px;
+	border: 2px solid #eb1478;
+	border-radius: 5px;
+	heightL: 21px;
+	line-height: 21px;
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+
+	color: rgb(51, 51, 51);
+	-webkit-appearance: none;
 }
 
 #web-content {
