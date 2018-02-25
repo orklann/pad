@@ -2,6 +2,7 @@ var {ipcRenderer, remote} = require('electron');
 
 function main() {
   console.log("main() loaded...");
+  document.body.style.backgroundColor="rgb(44, 37, 65)";
   window.addEventListener('keydown', onKeydown, false);
   var addressDiv = document.querySelector('#url-div');
   addressDiv.style.display = "none";
@@ -10,6 +11,10 @@ function main() {
   webview.addEventListener('did-navigate', function(event) {
     var address = document.querySelector('#url-address');
     address.value = webview.src;
+  });
+
+  webview.addEventListener('load-commit', function(event) {
+      document.body.removeAttribute("style");
   });
 
   webview.addEventListener('did-finish-load', function(event) {
