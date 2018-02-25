@@ -10,16 +10,21 @@ function main() {
   var webview = document.querySelector("#web-content");
   webview.addEventListener('did-navigate', function(event) {
     var address = document.querySelector('#url-address');
-    address.value = webview.src;
+    address.value = webview.getURL();
   });
 
   webview.addEventListener('load-commit', function(event) {
-      document.body.removeAttribute("style");
+    document.body.removeAttribute("style");
   });
 
   webview.addEventListener('did-finish-load', function(event) {
     var address = document.querySelector('#url-address');
-    address.value = webview.src;
+    address.value = webview.getURL();
+  });
+
+  webview.addEventListener('did-navigate-in-page', function(event) {
+    var address = document.querySelector('#url-address');
+    address.value = webview.getURL();
   });
 }
 
@@ -32,13 +37,21 @@ function onKeydown(e) {
     var address = document.querySelector('#url-address');
     address.focus();
     address.setSelectionRange(0, address.value.length);
+  } else if (character == 'Z' && e.metaKey){
+    var addressDiv = document.querySelector('#url-div');
+    addressDiv.style.display = "inline-block";
+    var webview = document.querySelector("#web-content");
+    var address = document.querySelector('#url-address');
+    address.value = webview.getURL();
+    address.focus();
+    address.setSelectionRange(0, address.value.length);
   } else if (e.keyCode == 13) {
     var address = document.querySelector('#url-address');
     var iframe = document.querySelector("#web-content");
     var url = address.value;
     url = url.replace("http://", '');
     url = url.replace("https://", '');
-    iframe.src = "http://" + url;
+    iframe.loadURL("http://" + url);
     var addressDiv = document.querySelector('#url-div');
     addressDiv.style.display = "none";
   } else if(e.keyCode == 27) {
