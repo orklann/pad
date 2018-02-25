@@ -13,6 +13,9 @@ function onKeydown(e) {
   if (character == 'D' && e.metaKey) {
     var addressDiv = document.querySelector('#url-div');
     addressDiv.style.display = "inline-block";
+    var address = document.querySelector('#url-address');
+    address.focus();
+    address.setSelectionRange(0, address.value.length);
   } else if (e.keyCode == 13) {
     var address = document.querySelector('#url-address');
     var iframe = document.querySelector("#web-content");
