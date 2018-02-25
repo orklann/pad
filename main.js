@@ -59,19 +59,6 @@ app.on('ready', () => {
   imageWindows.push(win);
 });
 
-ipcMain.on('disable-x-frame', (event, arg) => {
-
-  session.fromPartition(arg.partition).webRequest.onHeadersReceived({}, (d, c) => {
-
-	if(d.responseHeaders['x-frame-options'] || d.responseHeaders['X-Frame-Options']){
-		delete d.responseHeaders['x-frame-options'];
-		delete d.responseHeaders['X-Frame-Options'];
-	}
-	c({cancel: false, responseHeaders: d.responseHeaders, statusLine: d.statusLine});
-  });
-
-});
-
 function showWindowAtCenterTop(w) {
   screen = electron.screen;
   var mainScreen = screen.getPrimaryDisplay();
@@ -106,7 +93,18 @@ function buildMenu(){
       {role: 'quit'}
       ]
   	},
-	  {
+    {
+      label: "Edit",
+      submenu: [
+          { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+          { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+          { type: "separator" },
+          { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+          { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+          { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+          { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+      ]},
+	 {
 	    label: 'View',
 	    submenu: [
   			{role: 'reload'},

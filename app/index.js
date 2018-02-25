@@ -5,6 +5,17 @@ function main() {
   window.addEventListener('keydown', onKeydown, false);
   var addressDiv = document.querySelector('#url-div');
   addressDiv.style.display = "none";
+
+  var webview = document.querySelector("#web-content");
+  webview.addEventListener('did-navigate', function(event) {
+    var address = document.querySelector('#url-address');
+    address.value = webview.src;
+  });
+
+  webview.addEventListener('did-finish-load', function(event) {
+    var address = document.querySelector('#url-address');
+    address.value = webview.src;
+  });
 }
 
 function onKeydown(e) {
