@@ -16,7 +16,6 @@ require('electron-debug')();
 var imageWindows = [];
 let screen;
 
-var fontArialUnicode;
 function createMainWindow(w, h) {
   const win = new electron.BrowserWindow({
   	width: w,
@@ -24,6 +23,7 @@ function createMainWindow(w, h) {
     show: false,
     'use-content-size': true,
     webPreferences: {
+            plugins: true,
         webSecurity: false
     },
     titleBarStyle: 'hidden'
@@ -37,7 +37,6 @@ function createMainWindow(w, h) {
   win.on('ready-to-show', function(event){
     win.show();
     win.focus();
-    win.webContents.send('FONT_LOADED', {fontName: "Arial Unicode", data: fontArialUnicode});
   });
 
   return win;
