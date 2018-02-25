@@ -1,0 +1,44 @@
+{
+  "name": "Pad",
+  "productName": "Pad",
+  "version": "1.0.0",
+  "description": "Web browser",
+  "license": "MIT",
+  "repository": "orklann/pad",
+  "author": {
+    "name": "Aaron Elkins",
+    "email": "threcius@yahoo.com",
+    "url": "pixelegg.me"
+  },
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "electron-packager . --out=dist --asar --overwrite --all"
+  },
+  "main": "main.js",
+  "files": [
+    "main.js",
+    "index.html",
+    "index.css"
+  ],
+  "keywords": [
+    "electron-app",
+    "electron"
+  ],
+  "dependencies": {
+    "electron-debug": "^1.0.0"
+  },
+  "devDependencies": {
+    "devtron": "^1.1.0",
+    "electron-packager": "^8.0.0",
+    "electron": "1.7.11",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}
