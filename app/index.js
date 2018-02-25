@@ -48,6 +48,14 @@ function main() {
   }, false);
 
   window.addEventListener('mousedown', onMousedown, false);
+
+  require('electron-context-menu')({
+    window: webview,
+  	prepend: (params, browserWindow) => [{
+  		label: '*Pad by Niffant*',
+  		visible: true
+  	}]
+  });
 }
 
 function onMousedown(e) {
