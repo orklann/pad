@@ -1,5 +1,7 @@
 var {ipcRenderer, remote} = require('electron');
 
+var coords;
+
 function main() {
   console.log("main() loaded...");
   document.body.style.backgroundColor="rgb(44, 37, 65)";
@@ -26,6 +28,32 @@ function main() {
     var address = document.querySelector('#url-address');
     address.value = webview.getURL();
   });
+
+  var getMouseCoordinates = function (e) {
+      'use strict';
+      return {
+          x: e.clientX,
+          y: e.clientY
+      };
+  };
+
+  document.addEventListener('mousemove', function (e) {
+      coords = getMouseCoordinates(e);
+  }, false);
+
+  window.addEventListener('mousedown', onMousedown, false);
+}
+
+function onMousedown(e) {
+  var address = document.querySelector('#url-address');
+  var divCoords = address.getBoundingClientRect();
+
+  if (coords.x >= divCoords.left && coords.x <= divCoords.right && coords.y >= divCoords.top && coords.y <= divCoords.bottom) {
+    // mouse on address input
+  } else {
+    var addressDiv = document.querySelector('#url-div');
+    addressDiv.style.display = "none";
+  }
 }
 
 function onKeydown(e) {
