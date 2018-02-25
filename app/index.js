@@ -13,6 +13,8 @@ function main() {
   webview.addEventListener('did-navigate', function(event) {
     var address = document.querySelector('#url-address');
     address.value = webview.getURL();
+    var title = webview.getTitle();
+    document.title = title;
   });
 
   webview.addEventListener('load-commit', function(event) {
@@ -22,11 +24,15 @@ function main() {
   webview.addEventListener('did-finish-load', function(event) {
     var address = document.querySelector('#url-address');
     address.value = webview.getURL();
+    var title = webview.getTitle();
+    document.title = title;
   });
 
   webview.addEventListener('did-navigate-in-page', function(event) {
     var address = document.querySelector('#url-address');
     address.value = webview.getURL();
+    var title = webview.getTitle();
+    document.title = title;
   });
 
   var getMouseCoordinates = function (e) {
