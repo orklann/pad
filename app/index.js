@@ -52,8 +52,11 @@ function main() {
   require('electron-context-menu')({
     window: webview,
   	prepend: (params, browserWindow) => [{
-  		label: '*Pad by Niffant*',
-  		visible: true
+  		label: 'Refresh',
+  		visible: true,
+        click: function(){
+            webview.loadURL(webview.getURL());
+        }
   	}]
   });
 }
