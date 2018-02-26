@@ -67,6 +67,18 @@ function main() {
             address.focus();
             address.setSelectionRange(0, address.value.length);
         }
+    },{
+        label: 'Go Back',
+  		visible: true,
+        click: function(){
+            document.querySelector("#web-content").goBack();
+        }
+    },{
+        label: 'Go Forward',
+  		visible: true,
+        click: function(){
+            document.querySelector("#web-content").goForward();
+        }
     }]
   });
 }
