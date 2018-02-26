@@ -9,6 +9,9 @@ function main() {
   var addressDiv = document.querySelector('#url-div');
   addressDiv.style.display = "none";
 
+  var address = document.querySelector('#url-address');
+  address.addEventListener('keydown', onInputKeydown, false);
+
   var webview = document.querySelector("#web-content");
   webview.addEventListener('did-navigate', function(event) {
     var address = document.querySelector('#url-address');
@@ -112,15 +115,6 @@ function onKeydown(e) {
     address.value = webview.getURL();
     address.focus();
     address.setSelectionRange(0, address.value.length);
-  } else if (e.keyCode == 13) {
-    var address = document.querySelector('#url-address');
-    var iframe = document.querySelector("#web-content");
-    var url = address.value;
-    url = url.replace("http://", '');
-    url = url.replace("https://", '');
-    iframe.loadURL("http://" + url);
-    var addressDiv = document.querySelector('#url-div');
-    addressDiv.style.display = "none";
   } else if(e.keyCode == 27) {
     var addressDiv = document.querySelector('#url-div');
     addressDiv.style.display = "none";
@@ -130,6 +124,19 @@ function onKeydown(e) {
     document.querySelector("#web-content").goForward();
   }
   console.log("Window keydown detected.");
+}
+
+function onInputKeydown(e) {
+  if (e.keyCode == 13) {
+    var address = document.querySelector('#url-address');
+    var iframe = document.querySelector("#web-content");
+    var url = address.value;
+    url = url.replace("http://", '');
+    url = url.replace("https://", '');
+    iframe.loadURL("http://" + url);
+    var addressDiv = document.querySelector('#url-div');
+    addressDiv.style.display = "none";
+  }
 }
 
 main();
